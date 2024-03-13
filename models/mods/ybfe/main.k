@@ -26,5 +26,5 @@ hellocollaset: ac.AppConfiguration {
             }
         ]
     }
-    accaccessories :{}
+    accessories: {}
 }
