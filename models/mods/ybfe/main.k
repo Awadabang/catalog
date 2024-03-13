@@ -1,36 +1,17 @@
 import models.schema.v1 as ac
-import models.schema.v1.trait as t
 import models.schema.v1.workload as wl
 import models.schema.v1.workload.container as c
-import models.schema.v1.workload.network as n
 
 # base.k declares reusable configurations for all stacks.
-schema Config:
-    name: str
-
-render = lambda a: Config {
-    output=ac.AppConfiguration {
-        workload: wl.Service {
-            containers: {
-                "${a.name}": c.Container {
-                    image: "nginx:v1"
-                    # Run the following command as defined
-                    command: ["/bin/sh", "-c", "echo hi"]
-                    # Extra arguments append to command defined above
-                    args: ["/bin/sh", "-c", "echo hi"]
-                    # Run the command "/bin/sh -c echo hi", as defined above, in the directory "/tmp"
-                    workingDir: "/tmp"
-                }
+schema YBFE(ac.AppConfiguration):
+    """ YBFE基本的AppConfiguration配置 """
+    workload: wl.Service {
+        containers: {
+            "ybfe": c.Container {
+                image: imageName
             }
-            # Ports to expose
-            ports: [
-                n.Port {
-                    port: 80
-                }
-            ]
         }
-        accessories: {}
     }
-}
-
-renderoutput = render(Config.instances()[0])
+    accessories={}
+    """ YBFE抽象的下游配置 """
+    imageName: str = "ybfe:v1"
