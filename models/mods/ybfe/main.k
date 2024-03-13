@@ -26,9 +26,5 @@ hellocollaset: ac.AppConfiguration {
             }
         ]
     }
-    # accaccessories :{
-    #         "kusionstack/opsrule@v0.1" : t.OpsRule {
-    #         maxUnavailable: "30%"
-    #     }
-    # }
+    accaccessories :{}
 }
